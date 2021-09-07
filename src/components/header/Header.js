@@ -3,7 +3,7 @@ import styled from "styled-components";
 export default function Header({ userImage }) {
     return (
         <HeaderContainer>
-            <Logo>TrackIt</Logo>
+            <LogoText>TrackIt</LogoText>
             <ProfileImage src={userImage} />
         </HeaderContainer>
     );
@@ -22,7 +22,7 @@ const HeaderContainer = styled.header`
     align-items: center;
 `;
 
-const Logo = styled.span` 
+const LogoText = styled.span` 
     font-family: 'Playball', cursive;
     font-size: 39px;
     color: rgba(255, 255, 255, 1);
@@ -34,4 +34,5 @@ const ProfileImage = styled.img`
     width: 51px;
     border-radius: 50%;
     margin-right: 20px;
+    object-fit: cover;
 `;
