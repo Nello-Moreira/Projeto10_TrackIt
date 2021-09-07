@@ -1,3 +1,12 @@
+import Header from '../components/header/Header';
+
+
+import { user } from '../mockData';
+
 export default function Habits(params) {
-    return "habits";
-};
+    return (
+        <>
+            <Header userImage={user.image}/>
+        </>
+    );
+}
