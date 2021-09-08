@@ -1,3 +1,7 @@
+const daysFirstLetter = [
+    'D', 'S', 'T', 'Q', 'Q', 'S', 'S'
+];
+
 function todaysFormattedString() {
     const today = new Date();
     const options = { weekday: 'long', month: 'numeric', day: 'numeric' };
@@ -20,4 +24,4 @@ function getDayPercentage() {
     return dayPercentage;
 }
 
-export { todaysFormattedString, getDayPercentage };
+export { daysFirstLetter, todaysFormattedString, getDayPercentage };
