@@ -18,9 +18,7 @@ export default function Today(params) {
             <Header userImage={user.image} />
             <PageContainer>
                 <PageHeadingContainer>
-                    <PageHeading>
-                        {todaysFormattedString()}
-                    </PageHeading>
+                    <PageHeading>{todaysFormattedString()}</PageHeading>
                     <PageSubHeading activitiesPercentage={0}>Nenhum hábito concluído ainda</PageSubHeading>
                 </PageHeadingContainer>
 
