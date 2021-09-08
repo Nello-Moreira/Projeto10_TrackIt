@@ -11,4 +11,16 @@ const NewHabitContainer = styled.div`
     align-items: center;
 `;
 
-export default NewHabitContainer;
+const ButtonsContainer = styled.div`
+    width: 100%;
+    margin-top: 30px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    >button {
+        margin-left: 20px;
+    }
+`;
+
+export { NewHabitContainer, ButtonsContainer };
