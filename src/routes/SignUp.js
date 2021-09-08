@@ -15,7 +15,7 @@ export default function SignUp() {
             <TextInput placeholder="senha" />
             <TextInput placeholder="nome" />
             <TextInput placeholder="url da foto" />
-            <BlueButton style='login'>Cadastrar</BlueButton>
+            <BlueButton>Cadastrar</BlueButton>
             <Link to={routes.login}>
                 Já tem uma conta? Faça login!
             </Link>

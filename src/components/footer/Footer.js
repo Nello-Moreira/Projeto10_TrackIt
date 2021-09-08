@@ -20,7 +20,7 @@ export default function Footer() {
                         background
                         backgroundPadding={6}
                         styles={buildStyles({
-                            backgroundColor: "#3e98c7",
+                            backgroundColor: "rgb(18, 107, 165)",
                             textColor: "#fff",
                             pathColor: "#fff",
                             trailColor: "transparent"

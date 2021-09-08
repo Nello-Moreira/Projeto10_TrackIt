@@ -13,7 +13,7 @@ export default function Login() {
             <Logo />
             <TextInput placeholder="email" />
             <TextInput placeholder="senha" />
-            <BlueButton style='login'>Entrar</BlueButton>
+            <BlueButton>Entrar</BlueButton>
             <Link to={routes.signUp}>
                 Não tem uma conta? Cadastre-se!
             </Link>

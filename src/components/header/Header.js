@@ -14,6 +14,7 @@ const HeaderContainer = styled.header`
     width: 375px;
     width: 100vw;
     background-color: rgba(18, 107, 165, 1);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
     position: fixed;
     top: 0px;
     left: 0px;

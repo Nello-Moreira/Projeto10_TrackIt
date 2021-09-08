@@ -1,23 +1,23 @@
 import styled from "styled-components";
 
-export default function BlueButton({ style = '', children }) {
+export default function BlueButton({ customStyle = '', children }) {
     return (
-        <Button customStyle={style}>
+        <Button customStyle={customStyle}>
             {children}
         </Button>
     )
 };
 
 const Button = styled.button`
-    font-size:${({ customStyle }) => customStyle === 'login' ? '21px' : '16px'};
+    font-size:${({ customStyle }) => customStyle.fontSize ? customStyle.fontSize : '21px'};
     color: rgb(255, 255, 255);
-    width: ${({ customStyle }) => customStyle === 'login' ? '90%' : 'auto'};
-    height: ${({ customStyle }) => customStyle === 'login' ? '45px' : '35px'};
-    background-color: rgba(18, 107, 165, 1);
+    width: ${({ customStyle }) => customStyle.width ? customStyle.width : '90%'};
+    height: ${({ customStyle }) => customStyle.height ? customStyle.height : '45px'};
+    background-color: rgb(18, 107, 165);
     border: none;
     border-radius: 5px;
 
     :hover{
-        background-color: rgba(82, 182, 255, 1);
+        background-color: rgb(82, 182, 255);
     }
 `;
