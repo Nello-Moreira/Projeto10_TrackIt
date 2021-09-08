@@ -15,7 +15,7 @@ export default function Login() {
             <TextInput placeholder="senha" />
             <BlueButton style='login'>Entrar</BlueButton>
             <Link to={routes.signUp}>
-                <span>Não tem uma conta? Cadastre-se!</span>
+                Não tem uma conta? Cadastre-se!
             </Link>
         </LoginContainer >
     );

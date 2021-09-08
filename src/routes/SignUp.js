@@ -17,7 +17,7 @@ export default function SignUp() {
             <TextInput placeholder="url da foto" />
             <BlueButton style='login'>Cadastrar</BlueButton>
             <Link to={routes.login}>
-                <span>Já tem uma conta? Faça login!</span>
+                Já tem uma conta? Faça login!
             </Link>
         </LoginContainer >
     );
