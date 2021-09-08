@@ -11,10 +11,10 @@ export default function SignUp() {
     return (
         <LoginContainer>
             <Logo />
-            <TextInput placeholder="email" />
-            <TextInput placeholder="senha" />
-            <TextInput placeholder="nome" />
-            <TextInput placeholder="url da foto" />
+            <TextInput placeholder="email" customStyle={{width:'90%'}}/>
+            <TextInput placeholder="senha" customStyle={{width:'90%'}} />
+            <TextInput placeholder="nome" customStyle={{width:'90%'}} />
+            <TextInput placeholder="url da foto" customStyle={{width:'90%'}} />
             <BlueButton>Cadastrar</BlueButton>
             <Link to={routes.login}>
                 Já tem uma conta? Faça login!

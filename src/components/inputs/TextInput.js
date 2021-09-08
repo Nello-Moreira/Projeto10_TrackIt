@@ -1,8 +1,8 @@
-import { useState } from "react";
-import styled from "styled-components";
+import { useState } from 'react';
+import styled from 'styled-components';
 
 
-export default function TextInput({ initialValue = "", placeholder = "Digite aqui" }) {
+export default function TextInput({ initialValue = '', placeholder = 'Digite aqui', customStyle = '' }) {
     const [value, setvalue] = useState(initialValue);
 
     return (
@@ -10,6 +10,7 @@ export default function TextInput({ initialValue = "", placeholder = "Digite aqu
             placeholder={placeholder}
             onChange={(event) => setvalue(event.target.value)}
             value={value}
+            customStyle={customStyle}
         />
     );
 };
@@ -17,7 +18,7 @@ export default function TextInput({ initialValue = "", placeholder = "Digite aqu
 const InputStyled = styled.input`
     font-size: 20px;
     color: rgb(70,70,70);
-    width: 90%;
+    width: ${({ customStyle }) => customStyle.width ? customStyle.width : '100%'};
     padding: 10px;
     border: 1px solid rgb(200, 200, 200);
     border-radius: 5px;

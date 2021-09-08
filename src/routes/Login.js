@@ -11,8 +11,8 @@ export default function Login() {
     return (
         <LoginContainer>
             <Logo />
-            <TextInput placeholder="email" />
-            <TextInput placeholder="senha" />
+            <TextInput placeholder="email" customStyle={{width:'90%'}} />
+            <TextInput placeholder="senha" customStyle={{width:'90%'}} />
             <BlueButton>Entrar</BlueButton>
             <Link to={routes.signUp}>
                 Não tem uma conta? Cadastre-se!
