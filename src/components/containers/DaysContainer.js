@@ -7,7 +7,7 @@ export default function DaysContainer({ selectedDays, toggleDaySelection }) {
             {daysFirstLetter.map((letter, index) => (
                 <OneDayContainer
                     isSelected={selectedDays.includes(index)}
-                    onClick={() => toggleDaySelection(index)}
+                    onClick={toggleDaySelection ? () => toggleDaySelection(index) : null}
                     key={index}
                 >
                     {letter}

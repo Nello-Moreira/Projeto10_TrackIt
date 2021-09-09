@@ -1,11 +1,11 @@
-import { NewHabitContainer, ButtonsContainer } from '../containers/NewHabitContainer';
+import { HabitContainer, InformationContainer, BottomButtonsContainer } from '../containers/HabitContainer';
 import TextInput from '../inputs/TextInput';
 import DaysContainer from '../containers/DaysContainer';
 import CancelButton from '../buttons/CancelButton';
 import BlueButton from '../buttons/BlueButton';
 import { useState } from 'react';
 
-export default function NewHabit(params) {
+export default function NewHabit() {
     const [selectedDays, setSelectedDays] = useState([]);
 
     function toggleDaySelection(dayIndex) {
@@ -16,16 +16,17 @@ export default function NewHabit(params) {
     }
 
     return (
-        <NewHabitContainer>
-            <TextInput placeholder="nome do hábito" />
+        <HabitContainer>
+            <InformationContainer>
+                <TextInput placeholder="nome do hábito" />
 
-            <DaysContainer selectedDays={selectedDays} toggleDaySelection={toggleDaySelection} />
+                <DaysContainer selectedDays={selectedDays} toggleDaySelection={toggleDaySelection} />
 
-
-            <ButtonsContainer>
-                <CancelButton />
-                <BlueButton customStyle={{ 'font-size': '20px', width: '84px', height: '35px' }}>Salvar</BlueButton>
-            </ButtonsContainer>
-        </NewHabitContainer>
+                <BottomButtonsContainer>
+                    <CancelButton />
+                    <BlueButton customStyle={{ 'font-size': '20px', width: '84px', height: '35px' }}>Salvar</BlueButton>
+                </BottomButtonsContainer>
+            </InformationContainer>
+        </HabitContainer>
     );
 };

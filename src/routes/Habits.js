@@ -5,10 +5,11 @@ import PageHeading from '../components/headings/PageHeading';
 import BlueButton from '../components/buttons/BlueButton';
 import NewHabit from '../components/habit/NewHabit';
 import WarningOfNoHabits from '../components/habit/WarningOfNoHabits';
+import CreatedHabit from '../components/habit/CreatedHabit';
 import Footer from '../components/footer/Footer';
 
 
-import { user } from '../mockData';
+import { user, habits } from '../mockData';
 
 
 
@@ -24,11 +25,19 @@ export default function Habits(params) {
                     </PageHeading>
                 </PageHeadingContainer>
 
-                <NewHabit/>
-                
+                <NewHabit />
+
                 <WarningOfNoHabits>
                     Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a acompanhar!
                 </WarningOfNoHabits>
+
+
+
+                {habits.map((habit) =>
+                    <CreatedHabit habit={habit} key={habit.id} />
+                )}
+
+
 
             </PageContainer>
             <Footer />
