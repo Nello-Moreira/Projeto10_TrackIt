@@ -19,11 +19,10 @@ export default function Login({ setUser }) {
         setLoading(true);
         login(inputsValues)
             .then(response => {
-                setUser(response.data);
+                setUser({ ...response.data });
                 history.push(routes.today);
             })
             .catch(response => {
-                console.log(response);
                 alert('Houve uma falha no login. Por favor, tente novamente.');
                 setLoading(false);
             })

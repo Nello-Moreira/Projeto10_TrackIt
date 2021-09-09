@@ -6,14 +6,19 @@ import PageSubHeading from '../components/headings/PageSubHeading';
 import Footer from '../components/footer/Footer';
 import Habit from '../components/habit/Habit';
 import { todaysFormattedString } from '../auxiliary/time';
+import UserContext from '../contexts/UserContext';
+import { useContext } from 'react';
 
 
-import { user, habits } from '../mockData';
+
+import { habits } from '../mockData';
 
 
 
 
 export default function Today(params) {
+    const user = useContext(UserContext);
+
     return (
         <>
             <Header userImage={user.image} />

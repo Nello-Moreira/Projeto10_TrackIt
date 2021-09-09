@@ -7,13 +7,13 @@ import Today from './routes/Today';
 import History from './routes/History';
 import { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import UserContext from './contexts/UserContext';
 
 export default function App() {
-  const [user, setUser] = useState('');
+  const [user, setUser] = useState({});
 
-  console.log({ user });
   return (
-    <div className="App">
+    <UserContext.Provider value={user}>
       <Router>
         <Switch>
           <Route exact path={routes.login}>
@@ -37,6 +37,6 @@ export default function App() {
           </Route>
         </Switch>
       </Router>
-    </div>
+    </UserContext.Provider>
   );
 }

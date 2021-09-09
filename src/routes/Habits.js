@@ -7,13 +7,19 @@ import NewHabit from '../components/habit/NewHabit';
 import WarningOfNoHabits from '../components/habit/WarningOfNoHabits';
 import CreatedHabit from '../components/habit/CreatedHabit';
 import Footer from '../components/footer/Footer';
+import UserContext from '../contexts/UserContext';
+import { useContext } from 'react';
 
 
-import { user, habits } from '../mockData';
+
+import { habits } from '../mockData';
 
 
 
 export default function Habits(params) {
+    const user = useContext(UserContext);
+
+    console.log({ user })
     return (
         <>
             <Header userImage={user.image} />
