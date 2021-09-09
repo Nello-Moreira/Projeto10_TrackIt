@@ -19,7 +19,6 @@ export default function DaysContainer({ selectedDays, toggleDaySelection }) {
 
 const Container = styled.div`
     width: 100%;
-    margin-top: 7px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -31,9 +30,9 @@ const Container = styled.div`
 
 const OneDayContainer = styled.div`
     font-size: 20px;
-    color: ${({ isSelected }) => isSelected ? 'rgb(255, 255, 255)' : 'rgb(219, 219, 219)'};
+    color: ${({ isSelected }) => isSelected ? 'rgb(200, 200, 200)' : 'rgb(255, 255, 255)'};
     padding: 5px 7px;
-    background-color: ${({ isSelected }) => isSelected ? 'rgb(219, 219, 219)' : 'rgb(255, 255, 255)'};
+    background-color: ${({ isSelected }) => isSelected ? 'rgb(255, 255, 255)' : 'rgb(219, 219, 219)'};
     border: 1px solid rgb(212, 212, 212);
     border-radius: 5px;
 `;

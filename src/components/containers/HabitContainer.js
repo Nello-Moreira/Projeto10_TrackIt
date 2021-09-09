@@ -15,6 +15,10 @@ const InformationContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+
+    >*:first-child{
+        margin-bottom: 8px;
+    }
 `;
 
 const HabitTitle = styled.h2`
@@ -23,16 +27,16 @@ const HabitTitle = styled.h2`
 `;
 
 const RecordStatement = styled.p`
-    color: 'rgb(150, 150, 150, 1)';
+    color: rgba(102, 102, 102, 1);
 `;
 
 const RecordDays = styled.span`
-    color: ${({ newRecord }) => newRecord ? 'rgb(117, 184, 31)' : 'rgb(150, 150, 150, 1)'};
+    color: ${({ newRecord }) => newRecord ? 'rgb(117, 184, 31)' : 'rgba(102, 102, 102, 1)'};
 `;
 
 const BottomButtonsContainer = styled.div`
     width: 100%;
-    margin-top: 30px;
+    margin-top: 15px;
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -50,4 +54,4 @@ const SideButtonContainer = styled.div`
     align-items: flex-start;
 `;
 
-export { HabitContainer, InformationContainer, HabitTitle, SideButtonContainer, BottomButtonsContainer };
+export { HabitContainer, InformationContainer, HabitTitle, SideButtonContainer, BottomButtonsContainer, RecordStatement, RecordDays };
