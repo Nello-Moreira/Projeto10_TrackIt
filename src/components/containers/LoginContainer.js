@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const LoginContainer = styled.div`
-    margin-top: 70px;
+    margin: 70px 0 50px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -28,8 +28,14 @@ const LoginContainer = styled.div`
     }
 
     a:hover {
-        color: rgb(53 154 228);
+        color: ${({ loading }) => loading ? 'rgb(25 107 167)' : 'rgb(53 154 228)'};
     }
 `;
 
-export default LoginContainer;
+const FakeLink = styled.p`
+    font-size: 18px;
+    color: rgb(25 107 167);
+    text-decoration: underline;
+`;
+
+export { LoginContainer, FakeLink };
