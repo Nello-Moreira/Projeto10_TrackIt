@@ -17,12 +17,11 @@ import { habits } from '../mockData';
 
 
 export default function Habits(params) {
-    const user = useContext(UserContext);
+    const { user } = useContext(UserContext);
 
-    console.log({ user })
     return (
         <>
-            <Header userImage={user.image} />
+            <Header />
             <PageContainer>
                 <PageHeadingContainer>
                     <PageHeading>

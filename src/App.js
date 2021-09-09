@@ -13,17 +13,17 @@ export default function App() {
   const [user, setUser] = useState({});
 
   return (
-    <UserContext.Provider value={user}>
-      <Router>
-        <Switch>
-          <Route exact path={routes.login}>
-            <Login setUser={setUser} />
-          </Route>
+    <Router>
+      <Switch>
+        <Route exact path={routes.login}>
+          <Login setUser={setUser} />
+        </Route>
 
-          <Route exact path={routes.signUp}>
-            <SignUp />
-          </Route>
+        <Route exact path={routes.signUp}>
+          <SignUp />
+        </Route>
 
+        <UserContext.Provider value={{ user, setUser }}>
           <Route exact path={routes.habits}>
             <Habits />
           </Route>
@@ -35,8 +35,8 @@ export default function App() {
           <Route exact path={routes.history}>
             <History />
           </Route>
-        </Switch>
-      </Router>
-    </UserContext.Provider>
+        </UserContext.Provider>
+      </Switch>
+    </Router>
   );
 }

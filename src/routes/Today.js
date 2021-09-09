@@ -10,18 +10,17 @@ import UserContext from '../contexts/UserContext';
 import { useContext } from 'react';
 
 
-
 import { habits } from '../mockData';
 
 
 
 
-export default function Today(params) {
-    const user = useContext(UserContext);
+export default function Today() {
+    const { user } = useContext(UserContext);
 
     return (
         <>
-            <Header userImage={user.image} />
+            <Header />
             <PageContainer>
                 <PageHeadingContainer>
                     <PageHeading>{todaysFormattedString()}</PageHeading>
