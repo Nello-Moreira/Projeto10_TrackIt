@@ -4,6 +4,7 @@ const FooterContainer = styled.div`
     width: 100vw;
     height: 70px;
     background-color: rgba(255, 255, 255, 1);
+    border-top: 1px solid rgba(217, 217, 217, 1);
     position: fixed;
     bottom: 0;
     left: 0;
