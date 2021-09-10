@@ -4,13 +4,11 @@ import DaysContainer from '../containers/DaysContainer';
 import CancelButton from '../buttons/CancelButton';
 import BlueButton from '../buttons/BlueButton';
 import UserContext from '../../contexts/UserContext';
-import HabitsContext from '../../contexts/HabitsContext';
 import { useState, useContext } from 'react';
 import { createNewHabit } from '../../API/requests';
 
-export default function NewHabit({ cancelAddition, habitObject, updateHabitObject }) {
+export default function NewHabit({ closeNewHabitsWindow, habitObject, updateHabitObject, habits }) {
     const { user } = useContext(UserContext);
-    const { habits, setHabits } = useContext(HabitsContext);
     const [loading, setLoading] = useState(false);
 
     function toggleDaySelection(dayIndex) {
@@ -40,12 +38,14 @@ export default function NewHabit({ cancelAddition, habitObject, updateHabitObjec
         createNewHabit({ ...habitObject }, user.token)
             .then((response) => {
                 updateHabitObject({ name: '', days: [] });
-                setHabits([...habits, response.data]);
+                habits.setHabits([...habits.data, response.data]);
+                setLoading(false);
+                closeNewHabitsWindow();
             })
             .catch((response) => {
                 alert('Não foi possível criar o novo hábito. Por favor, tente novamente.');
+                setLoading(false);
             });
-        setLoading(false);
     }
 
     return (
@@ -55,14 +55,18 @@ export default function NewHabit({ cancelAddition, habitObject, updateHabitObjec
                     value={habitObject.name}
                     valueRecorder={nameRecorder}
                     placeholder="nome do hábito"
+                    customStyle={{ loading }}
                 />
 
-                <DaysContainer selectedDays={habitObject.days} toggleDaySelection={toggleDaySelection} />
+                <DaysContainer
+                    selectedDays={habitObject.days}
+                    toggleDaySelection={loading ? null : toggleDaySelection}
+                />
 
                 <BottomButtonsContainer>
-                    <CancelButton onClick={cancelAddition} />
+                    <CancelButton onClick={loading ? null : closeNewHabitsWindow} />
                     <BlueButton
-                        onClick={requestCreation}
+                        onClick={loading ? null : requestCreation}
                         customStyle={{ 'font-size': '20px', width: '84px', height: '35px', loading }}
                     >
                         Salvar

@@ -8,23 +8,15 @@ import History from './routes/History';
 import { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import UserContext from './contexts/UserContext';
-import HabitsContext from './contexts/HabitsContext';
-import { getAllHabits } from './API/requests';
 
 export default function App() {
   const [user, setUser] = useState({});
-  const [habits, setHabits] = useState([]);
-
-  function habitsFirstLoad(token) {
-    getAllHabits(token)
-      .then(response => setHabits(response.data));
-  }
 
   return (
     <Router>
       <Switch>
         <Route exact path={routes.login}>
-          <Login setUser={setUser} habitsFirstLoad={habitsFirstLoad} />
+          <Login setUser={setUser} />
         </Route>
 
         <Route exact path={routes.signUp}>
@@ -32,19 +24,17 @@ export default function App() {
         </Route>
 
         <UserContext.Provider value={{ user, setUser }}>
-          <HabitsContext.Provider value={{ habits, setHabits }}>
-            <Route exact path={routes.habits}>
-              <Habits />
-            </Route>
+          <Route exact path={routes.habits}>
+            <Habits />
+          </Route>
 
-            <Route exact path={routes.today}>
-              <Today />
-            </Route>
+          <Route exact path={routes.today}>
+            <Today />
+          </Route>
 
-            <Route exact path={routes.history}>
-              <History />
-            </Route>
-          </HabitsContext.Provider>
+          <Route exact path={routes.history}>
+            <History />
+          </Route>
         </UserContext.Provider>
       </Switch>
     </Router>

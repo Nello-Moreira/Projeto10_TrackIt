@@ -13,7 +13,7 @@ const PageContainer = styled.div`
     }
 
     >*:last-child{
-        margin-bottom: 115px;
+        margin-bottom: 130px;
     }
 `;
 

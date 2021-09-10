@@ -20,7 +20,6 @@ export default function Login({ setUser, habitsFirstLoad }) {
         login(inputsValues)
             .then(response => {
                 setUser({ ...response.data });
-                habitsFirstLoad(response.data.token);
                 history.push(routes.today);
             })
             .catch(response => {

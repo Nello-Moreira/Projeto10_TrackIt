@@ -7,7 +7,6 @@ import Footer from '../components/footer/Footer';
 import Habit from '../components/habit/Habit';
 import { todaysFormattedString } from '../auxiliary/time';
 import UserContext from '../contexts/UserContext';
-import HabitsContext from '../contexts/HabitsContext';
 import { useContext } from 'react';
 
 
