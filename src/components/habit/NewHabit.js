@@ -7,7 +7,7 @@ import UserContext from '../../contexts/UserContext';
 import { useState, useContext } from 'react';
 import { createNewHabit } from '../../API/requests';
 
-export default function NewHabit({ closeNewHabitsWindow, habitObject, updateHabitObject, habits }) {
+export default function NewHabit({ closeNewHabitsWindow, habitObject, updateHabitObject, habits, updateHabitsPercentage }) {
     const { user } = useContext(UserContext);
     const [loading, setLoading] = useState(false);
 
@@ -21,6 +21,7 @@ export default function NewHabit({ closeNewHabitsWindow, habitObject, updateHabi
     function nameRecorder(newName) {
         updateHabitObject({ ...habitObject, name: newName });
     }
+
 
     function requestCreation() {
         if (habitObject.name === '') {
@@ -40,6 +41,7 @@ export default function NewHabit({ closeNewHabitsWindow, habitObject, updateHabi
                 updateHabitObject({ name: '', days: [] });
                 habits.setHabits([...habits.data, response.data]);
                 setLoading(false);
+                updateHabitsPercentage();
                 closeNewHabitsWindow();
             })
             .catch((response) => {

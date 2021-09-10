@@ -8,11 +8,13 @@ import CreatedHabit from '../components/habit/CreatedHabit';
 import Footer from '../components/footer/Footer';
 import CircleLoader from '../components/loader/CircleLoader';
 import UserContext from '../contexts/UserContext';
+import TodaysHabitsPercentage from '../contexts/TodaysHabitsPercentage';
 import { useState, useContext, useEffect } from 'react';
-import { getAllHabits } from '../API/requests';
+import { getAllHabits, getTodaysHabits } from '../API/requests';
 
 export default function Habits() {
     const { user } = useContext(UserContext);
+    const { habitsPercentage, setHabitsPercentage } = useContext(TodaysHabitsPercentage);
     const [adding, setAdding] = useState(false);
     const [loading, setLoading] = useState(true);
     const [habits, setHabits] = useState([]);
@@ -25,6 +27,18 @@ export default function Habits() {
                 setLoading(false);
             });
     }, [user.token]);
+
+
+    function updateHabitsPercentage() {
+        getTodaysHabits(user.token)
+            .then(response => {
+                setHabitsPercentage({
+                    ...habitsPercentage,
+                    done: response.data.filter((habit) => habit.done).length,
+                    total: response.data.length,
+                })
+            });
+    }
 
     return (
         <>
@@ -48,6 +62,7 @@ export default function Habits() {
                         updateHabitObject={setNewHabitObject}
                         closeNewHabitsWindow={() => setAdding(false)}
                         habits={{ data: habits, setHabits }}
+                        updateHabitsPercentage={updateHabitsPercentage}
                     />
                     :
                     null
@@ -65,12 +80,13 @@ export default function Habits() {
                             <CreatedHabit
                                 habit={habit}
                                 habits={{ data: habits, setHabits }}
+                                updateHabitsPercentage={updateHabitsPercentage}
                                 key={habit.id}
                             />
                         )
                 }
             </PageContainer>
-            
+
             <Footer />
         </>
     );

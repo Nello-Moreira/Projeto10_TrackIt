@@ -7,7 +7,7 @@ import { useState, useContext } from 'react';
 import { deleteHabit } from '../../API/requests';
 
 
-export default function CreatedHabit({ habit, habits }) {
+export default function CreatedHabit({ habit, habits, updateHabitsPercentage }) {
     const { user } = useContext(UserContext);
     const [loading, setLoading] = useState(false);
 
@@ -16,8 +16,10 @@ export default function CreatedHabit({ habit, habits }) {
             setLoading(true);
 
             deleteHabit(habit.id, user.token)
-                .then((response) =>
-                    habits.setHabits(habits.data.filter((otherHabit) => otherHabit.id !== habit.id))
+                .then((response) =>{
+                    updateHabitsPercentage();
+                    habits.setHabits(habits.data.filter((otherHabit) => otherHabit.id !== habit.id));
+                }
                 )
                 .catch((response) => alert('Algo deu errado. Por favor, tente de novo.'));
         }
