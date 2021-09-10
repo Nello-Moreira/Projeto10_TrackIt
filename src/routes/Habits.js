@@ -7,25 +7,13 @@ import NewHabit from '../components/habit/NewHabit';
 import WarningOfNoHabits from '../components/habit/WarningOfNoHabits';
 import CreatedHabit from '../components/habit/CreatedHabit';
 import Footer from '../components/footer/Footer';
-import UserContext from '../contexts/UserContext';
 import HabitsContext from '../contexts/HabitsContext';
 import { useState, useContext } from 'react';
 
-
-
-import { habits } from '../mockData';
-
-
-
 export default function Habits(params) {
-    const { user } = useContext(UserContext);
-    const { habits, setHabits } = useContext(HabitsContext);
-    const [loading, setLoading] = useState(false);
+    const { habits } = useContext(HabitsContext);
     const [adding, setAdding] = useState(false);
     const [newHabitObject, setNewHabitObject] = useState({ name: '', days: [] });
-
-    console.log(newHabitObject);
-
 
     return (
         <>
@@ -33,32 +21,29 @@ export default function Habits(params) {
             <PageContainer>
                 <PageHeadingContainer>
                     <PageHeading>
-                        {"Meus hábitos"}
+                        {'Meus hábitos'}
                         <BlueButton onClick={adding ? null : () => setAdding(true)} customStyle={{ width: '40px', height: '35px' }}>+</BlueButton>
                     </PageHeading>
                 </PageHeadingContainer>
 
                 {adding ?
                     <NewHabit
-                        cancelAddition={() => setAdding(false)}
                         habitObject={newHabitObject}
                         updateHabitObject={setNewHabitObject}
+                        cancelAddition={() => setAdding(false)}
                     />
                     :
                     null}
 
-
-                <WarningOfNoHabits>
-                    Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a acompanhar!
-                </WarningOfNoHabits>
-
-
-
-                {habits.map((habit) =>
-                    <CreatedHabit habit={habit} key={habit.id} />
-                )}
-
-
+                {habits.length === 0 ?
+                    <WarningOfNoHabits>
+                        Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a acompanhar!
+                    </WarningOfNoHabits>
+                    :
+                    habits.map((habit) =>
+                        <CreatedHabit habit={habit} key={habit.id} />
+                    )
+                }
 
             </PageContainer>
             <Footer />

@@ -9,16 +9,22 @@ import { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import UserContext from './contexts/UserContext';
 import HabitsContext from './contexts/HabitsContext';
+import { getAllHabits } from './API/requests';
 
 export default function App() {
   const [user, setUser] = useState({});
   const [habits, setHabits] = useState([]);
 
+  function habitsFirstLoad(token) {
+    getAllHabits(token)
+      .then(response => setHabits(response.data));
+  }
+
   return (
     <Router>
       <Switch>
         <Route exact path={routes.login}>
-          <Login setUser={setUser} />
+          <Login setUser={setUser} habitsFirstLoad={habitsFirstLoad} />
         </Route>
 
         <Route exact path={routes.signUp}>

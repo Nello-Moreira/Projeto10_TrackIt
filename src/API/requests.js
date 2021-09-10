@@ -21,6 +21,7 @@ function getTodaysHabits(token) {
 }
 
 function deleteHabit(habitId, token) {
+    console.log({ habitId, token })
     return axiosBase.delete(`/habits/${habitId}`, { headers: { 'Authorization': `Bearer ${token}` } });
 }
 

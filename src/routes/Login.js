@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { login } from '../API/requests';
 
-export default function Login({ setUser }) {
+export default function Login({ setUser, habitsFirstLoad }) {
     const [loading, setLoading] = useState(false);
     const [inputsValues, setInputsValues] = useState({
         email: '',
@@ -20,6 +20,7 @@ export default function Login({ setUser }) {
         login(inputsValues)
             .then(response => {
                 setUser({ ...response.data });
+                habitsFirstLoad(response.data.token);
                 history.push(routes.today);
             })
             .catch(response => {
