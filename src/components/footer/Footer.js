@@ -1,11 +1,14 @@
 import { FooterContainer, ProgressbarContainer } from './FooterStyles';
 import routes from "../../routes/routes";
-import { getDayPercentage } from '../../auxiliary/time';
 import { Link } from "react-router-dom";
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import "react-circular-progressbar/dist/styles.css";
+import { useContext } from 'react';
+import TodaysHabitsPercentage from "../../contexts/TodaysHabitsPercentage";
 
 export default function Footer() {
+    const { habitsPercentage } = useContext(TodaysHabitsPercentage);
+
     return (
         <FooterContainer>
             <Link to={routes.habits}>
@@ -16,7 +19,7 @@ export default function Footer() {
             <Link to={routes.today}>
                 <ProgressbarContainer>
                     <CircularProgressbar
-                        value={getDayPercentage()}
+                        value={habitsPercentage.getPercentage(habitsPercentage.done, habitsPercentage.total)}
                         text={'Hoje'}
                         background
                         backgroundPadding={6}
