@@ -1,24 +1,15 @@
 import Header from '../components/header/Header';
 import PageContainer from '../components/containers/PageContainer';
-import PageHeadingContainer from '../components/containers/PageHeadingContainer';
-import PageHeading from '../components/headings/PageHeading';
-import PageSubHeading from '../components/headings/PageSubHeading';
-import Footer from '../components/footer/Footer';
+import { PageHeadingContainer, PageHeading, PageSubHeading } from '../components/containers/PageHeadingContainer';
+import CircleLoader from '../components/loader/CircleLoader';
 import Habit from '../components/habit/Habit';
 import WarningOfNoHabits from '../components/habit/WarningOfNoHabits';
-import CircleLoader from '../components/loader/CircleLoader';
-import { todaysFormattedString } from '../auxiliary/time';
+import Footer from '../components/footer/Footer';
 import UserContext from '../contexts/UserContext';
 import TodaysHabitsPercentage from '../contexts/TodaysHabitsPercentage';
 import { useState, useContext, useEffect } from 'react';
 import { getTodaysHabits } from '../API/requests';
-
-
-
-import { habits } from '../mockData';
-
-
-
+import { todaysFormattedString } from '../auxiliary/time';
 
 export default function Today() {
     const { user } = useContext(UserContext);
@@ -43,20 +34,17 @@ export default function Today() {
     }
 
     function updateHabitsPercentage() {
-        const numberOfHabits = todaysHabits.length;
-        const numberOfDoneHabits = todaysHabits.filter((habit) => habit.done).length;
-
         setHabitsPercentage({
             ...habitsPercentage,
             done: todaysHabits.filter((habit) => habit.done).length,
             total: todaysHabits.length
         })
-
     }
 
     return (
         <>
             <Header />
+
             <PageContainer>
                 <PageHeadingContainer>
                     <PageHeading>{todaysFormattedString()}</PageHeading>
@@ -84,6 +72,7 @@ export default function Today() {
                         )
                 }
             </PageContainer>
+
             <Footer />
         </>
     );

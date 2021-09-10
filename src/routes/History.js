@@ -1,32 +1,28 @@
 import Header from '../components/header/Header';
 import PageContainer from '../components/containers/PageContainer';
-import PageHeadingContainer from '../components/containers/PageHeadingContainer';
-import PageHeading from '../components/headings/PageHeading';
+import { PageHeadingContainer, PageHeading } from '../components/containers/PageHeadingContainer';
 import Footer from '../components/footer/Footer';
+import UserContext from '../contexts/UserContext';
+import { useContext } from 'react';
 import styled from 'styled-components';
 
-
-
-import { user } from '../mockData';
-
-
-
-
 export default function History(params) {
+    const { user } = useContext(UserContext);
+
     return (
         <>
             <Header userImage={user.image} />
+
             <PageContainer>
                 <PageHeadingContainer>
                     <PageHeading>Histórico</PageHeading>
                 </PageHeadingContainer>
 
-
                 <FutureFeature>
                     Em breve você poderá ver o histórico dos seus hábitos aqui!
                 </FutureFeature>
-
             </PageContainer>
+
             <Footer />
         </>
     );

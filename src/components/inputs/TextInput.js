@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-
 export default function TextInput({ value = '', valueRecorder = null, placeholder = 'Digite aqui', customStyle = '' }) {
     return (
         <InputStyled
@@ -29,5 +28,5 @@ const InputStyled = styled.input`
     :focus {
       color: ${({ customStyle }) => customStyle.loading ? 'transparent' : 'rgb(70,70,70)'};
       text-shadow: ${({ customStyle }) => customStyle.loading ? '0px 0px 0px rgb(175, 175, 175)' : 'none'};
-  }
+    }
 `;

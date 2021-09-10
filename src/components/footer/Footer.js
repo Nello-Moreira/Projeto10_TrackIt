@@ -15,7 +15,6 @@ export default function Footer() {
                 Hábitos
             </Link>
 
-
             <Link to={routes.today}>
                 <ProgressbarContainer>
                     <CircularProgressbar
@@ -32,7 +31,6 @@ export default function Footer() {
                     />
                 </ProgressbarContainer>
             </Link>
-
 
             <Link to={routes.history}>
                 Histórico

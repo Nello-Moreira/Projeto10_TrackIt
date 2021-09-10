@@ -25,7 +25,7 @@ export default function Login({ setUser, habitsFirstLoad }) {
             .catch(response => {
                 alert('Houve uma falha no login. Por favor, tente novamente.');
                 setLoading(false);
-            })
+            });
     }
 
     return (

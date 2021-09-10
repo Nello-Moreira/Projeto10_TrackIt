@@ -1,7 +1,6 @@
 import Header from '../components/header/Header';
 import PageContainer from '../components/containers/PageContainer';
-import PageHeadingContainer from '../components/containers/PageHeadingContainer';
-import PageHeading from '../components/headings/PageHeading';
+import { PageHeadingContainer, PageHeading } from '../components/containers/PageHeadingContainer';
 import BlueButton from '../components/buttons/BlueButton';
 import NewHabit from '../components/habit/NewHabit';
 import WarningOfNoHabits from '../components/habit/WarningOfNoHabits';
@@ -30,16 +29,16 @@ export default function Habits() {
     return (
         <>
             <Header />
+
             <PageContainer>
                 <PageHeadingContainer>
                     <PageHeading>
                         {'Meus hábitos'}
+
                         <BlueButton
                             onClick={adding ? null : () => setAdding(true)}
                             customStyle={{ width: '40px', height: '35px' }}
-                        >
-                            +
-                        </BlueButton>
+                        >+</BlueButton>
                     </PageHeading>
                 </PageHeadingContainer>
 
@@ -70,11 +69,8 @@ export default function Habits() {
                             />
                         )
                 }
-
-                {
-                }
-
             </PageContainer>
+            
             <Footer />
         </>
     );
