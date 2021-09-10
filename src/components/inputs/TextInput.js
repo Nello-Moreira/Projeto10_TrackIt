@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
 
-export default function TextInput({ initialValue = '', valueRecorder = null, placeholder = 'Digite aqui', customStyle = '' }) {
+export default function TextInput({ value = '', valueRecorder = null, placeholder = 'Digite aqui', customStyle = '' }) {
     return (
         <InputStyled
             placeholder={placeholder}
             onChange={valueRecorder ? (event) => valueRecorder(event.target.value) : null}
-            value={initialValue}
+            value={value}
             customStyle={customStyle}
         />
     );

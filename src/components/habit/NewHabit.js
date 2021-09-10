@@ -5,25 +5,33 @@ import CancelButton from '../buttons/CancelButton';
 import BlueButton from '../buttons/BlueButton';
 import { useState } from 'react';
 
-export default function NewHabit() {
+export default function NewHabit({ cancelAddition, habitObject, updateHabitObject }) {
     const [selectedDays, setSelectedDays] = useState([]);
 
     function toggleDaySelection(dayIndex) {
-        selectedDays.includes(dayIndex) ?
-            setSelectedDays(selectedDays.filter(day => day !== dayIndex))
+        habitObject.days.includes(dayIndex) ?
+            updateHabitObject({ ...habitObject, days: habitObject.days.filter(day => day !== dayIndex) })
             :
-            setSelectedDays([...selectedDays, dayIndex].sort((a, b) => a - b));
+            updateHabitObject({ ...habitObject, days: [...habitObject.days, dayIndex].sort((a, b) => a - b) });
+    }
+
+    function nameRecorder(newName) {
+        updateHabitObject({ ...habitObject, name: newName });
     }
 
     return (
         <HabitContainer>
             <InformationContainer>
-                <TextInput placeholder="nome do hábito" />
+                <TextInput
+                    value={habitObject.name}
+                    valueRecorder={nameRecorder}
+                    placeholder="nome do hábito"
+                />
 
-                <DaysContainer selectedDays={selectedDays} toggleDaySelection={toggleDaySelection} />
+                <DaysContainer selectedDays={habitObject.days} toggleDaySelection={toggleDaySelection} />
 
                 <BottomButtonsContainer>
-                    <CancelButton />
+                    <CancelButton onClick={cancelAddition} />
                     <BlueButton customStyle={{ 'font-size': '20px', width: '84px', height: '35px' }}>Salvar</BlueButton>
                 </BottomButtonsContainer>
             </InformationContainer>

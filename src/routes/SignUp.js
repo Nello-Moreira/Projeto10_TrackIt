@@ -41,25 +41,25 @@ export default function SignUp() {
             <Logo />
 
             <TextInput
-                initialValue={inputsValues.email}
+                value={inputsValues.email}
                 valueRecorder={loading ? null : (value) => setInputsValues({ ...inputsValues, email: value })}
                 placeholder="email"
                 customStyle={{ width: '90%', loading: loading }}
             />
             <TextInput
-                initialValue={inputsValues.password}
+                value={inputsValues.password}
                 valueRecorder={loading ? null : (value) => setInputsValues({ ...inputsValues, password: value })}
                 placeholder="senha"
                 customStyle={{ width: '90%', loading: loading }}
             />
             <TextInput
-                initialValue={inputsValues.name}
+                value={inputsValues.name}
                 valueRecorder={loading ? null : (value) => setInputsValues({ ...inputsValues, name: value })}
                 placeholder="nome"
                 customStyle={{ width: '90%', loading: loading }}
             />
             <TextInput
-                initialValue={inputsValues.image}
+                value={inputsValues.image}
                 valueRecorder={loading ? null : (value) => setInputsValues({ ...inputsValues, image: value })}
                 placeholder="url da foto"
                 customStyle={{ width: '90%', loading: loading }}
