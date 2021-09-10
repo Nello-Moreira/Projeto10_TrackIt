@@ -1,8 +1,7 @@
 import { Checkbox } from 'react-ionicons';
 import styled from 'styled-components';
 
-
-export default function CheckButton({ onClick, done }) {
+export default function CheckButton({ customStyle, onClick, done }) {
     return (
         <Button onClick={onClick ? onClick : null}>
             <Checkbox

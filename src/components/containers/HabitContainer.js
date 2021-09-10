@@ -31,7 +31,7 @@ const RecordStatement = styled.p`
 `;
 
 const RecordDays = styled.span`
-    color: ${({ newRecord }) => newRecord ? 'rgb(117, 184, 31)' : 'rgba(102, 102, 102, 1)'};
+    color: ${({ green }) => green ? 'rgb(117, 184, 31)' : 'rgba(102, 102, 102, 1)'};
 `;
 
 const BottomButtonsContainer = styled.div`

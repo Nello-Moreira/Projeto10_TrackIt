@@ -1,18 +1,12 @@
 import styled from "styled-components";
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
-import Loader from "react-loader-spinner";
+import ThreeDotsLoader from "../loader/ThreeDotsLoader";
 
 export default function BlueButton({ customStyle = {}, onClick = null, children }) {
 
     return (
         <Button customStyle={customStyle} onClick={onClick}>
             {customStyle.loading ?
-                <Loader
-                    type="ThreeDots"
-                    color="rgb(255, 255, 255)"
-                    height={'20'}
-                    width={'50'}
-                />
+                <ThreeDotsLoader />
                 :
                 children
             }

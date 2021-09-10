@@ -24,12 +24,12 @@ function deleteHabit(habitId, token) {
     return axiosBase.delete(`/habits/${habitId}`, { headers: { 'Authorization': `Bearer ${token}` } });
 }
 
-function checkHabit(habitId, token) {
-    return axiosBase.post(`/habits/${habitId}/check`, { headers: { 'Authorization': `Bearer ${token}` } });
+function checkHabit(habit, token) {
+    return axiosBase.post(`/habits/${habit.id}/check`, { habit }, { headers: { 'Authorization': `Bearer ${token}` } });
 }
 
-function uncheckHabit(habitId, token) {
-    return axiosBase.post(`/habits/${habitId}/uncheck`, { headers: { 'Authorization': `Bearer ${token}` } });
+function uncheckHabit(habit, token) {
+    return axiosBase.post(`/habits/${habit.id}/uncheck`, { habit }, { headers: { 'Authorization': `Bearer ${token}` } });
 }
 
 function habitsHistory(token) {

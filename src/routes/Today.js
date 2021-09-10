@@ -16,28 +16,31 @@ export default function Today() {
     const { habitsPercentage, setHabitsPercentage } = useContext(TodaysHabitsPercentage);
     const [loading, setLoading] = useState(true);
     const [todaysHabits, setTodaysHabits] = useState([]);
+    const { done, total, getPercentage } = habitsPercentage;
 
     useEffect(() => {
         getTodaysHabits(user.token)
             .then(response => {
+                updateHabitsPercentage(response.data);
                 setTodaysHabits(response.data);
-                updateHabitsPercentage();
                 setLoading(false);
             });
     }, [user.token]);
 
-    function upDateHabit(habit) {
-        setTodaysHabits(
-            todaysHabits.map(oldHabit => oldHabit.id === habit.id ? habit : oldHabit)
-        );
-        updateHabitsPercentage();
+    function updateHabits() {
+        getTodaysHabits(user.token)
+            .then(response => {
+                updateHabitsPercentage(response.data);
+                setTodaysHabits(response.data);
+                setLoading(false);
+            });
     }
 
-    function updateHabitsPercentage() {
+    function updateHabitsPercentage(todaysHabits) {
         setHabitsPercentage({
-            ...habitsPercentage,
             done: todaysHabits.filter((habit) => habit.done).length,
-            total: todaysHabits.length
+            total: todaysHabits.length,
+            getPercentage
         })
     }
 
@@ -51,7 +54,18 @@ export default function Today() {
                     {todaysHabits.length === 0 ?
                         null
                         :
-                        <PageSubHeading activitiesPercentage={0}>Nenhum hábito concluído ainda</PageSubHeading>
+                        getPercentage(done, total) > 0 ?
+                            <PageSubHeading
+                                activitiesPercentage={getPercentage(done, total)}
+                            >
+                                {`${getPercentage(done, total).toFixed(0)}% dos hábitos concluídos`}
+                            </PageSubHeading>
+                            :
+                            <PageSubHeading
+                                activitiesPercentage={0}
+                            >
+                                Nenhum hábito concluído ainda
+                            </PageSubHeading>
                     }
                 </PageHeadingContainer>
 
@@ -66,7 +80,7 @@ export default function Today() {
                         todaysHabits.map((habit) =>
                             <Habit
                                 habit={habit}
-                                upDateHabit={upDateHabit}
+                                updateHabits={updateHabits}
                                 key={habit.id}
                             />
                         )
