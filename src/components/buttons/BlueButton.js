@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import ThreeDotsLoader from "../loader/ThreeDotsLoader";
 
-export default function BlueButton({ customStyle = {}, onClick = null, children }) {
+export default function BlueButton({ customStyle = {}, children, ...otherProps }) {
 
     return (
-        <Button customStyle={customStyle} onClick={onClick}>
+        <Button customStyle={customStyle} {...otherProps}>
             {customStyle.loading ?
                 <ThreeDotsLoader />
                 :

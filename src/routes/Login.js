@@ -1,5 +1,6 @@
 import { LoginContainer, FakeLink } from '../components/containers/LoginContainer';
 import Logo from '../components/logo/Logo';
+import CustomForm from '../components/inputs/CustomForm';
 import TextInput from '../components/inputs/TextInput';
 import BlueButton from '../components/buttons/BlueButton';
 import routes from '../routes/routes';
@@ -15,16 +16,22 @@ export default function Login({ setUser, habitsFirstLoad }) {
     });
     const history = useHistory();
 
-    function requestLogin() {
+    function requestLogin(event) {
+        event.preventDefault();
+
         setLoading(true);
         login(inputsValues)
             .then(response => {
                 setUser({ ...response.data });
                 history.push(routes.today);
             })
-            .catch(response => {
-                alert('Houve uma falha no login. Por favor, tente novamente.');
+            .catch(error => {
                 setLoading(false);
+
+                if (error.response.status === 401) return alert(error.response.data.message);
+                if (error.response.status === 422) {
+                    alert('Houve uma falha no login. Por favor, verifique o e-mail e tente novamente.')
+                };
             });
     }
 
@@ -32,22 +39,28 @@ export default function Login({ setUser, habitsFirstLoad }) {
         <LoginContainer loading={{ loading }}>
             <Logo />
 
-            <TextInput
-                value={inputsValues.email}
-                valueRecorder={loading ? null : (value) => setInputsValues({ ...inputsValues, email: value })}
-                placeholder="email"
-                customStyle={{ width: '90%', loading: loading }}
-            />
-            <TextInput
-                value={inputsValues.password}
-                valueRecorder={loading ? null : (value) => setInputsValues({ ...inputsValues, password: value })}
-                placeholder="senha"
-                customStyle={{ width: '90%', loading: loading }}
-            />
+            <CustomForm onSubmit={requestLogin}>
+                <TextInput
+                    value={inputsValues.email}
+                    valueRecorder={loading ? null : (value) => setInputsValues({ ...inputsValues, email: value })}
+                    placeholder="email"
+                    customStyle={{ width: '90%', loading: loading }}
+                    type='email'
+                    required
+                />
+                <TextInput
+                    value={inputsValues.password}
+                    valueRecorder={loading ? null : (value) => setInputsValues({ ...inputsValues, password: value })}
+                    placeholder="senha"
+                    customStyle={{ width: '90%', loading: loading }}
+                    type='password'
+                    required
+                />
 
-            <BlueButton onClick={loading ? null : requestLogin} customStyle={{ loading: loading }}>
-                Entrar
-            </BlueButton>
+                <BlueButton type="submit" customStyle={{ loading: loading }}>
+                    Entrar
+                </BlueButton>
+            </CustomForm>
 
             {loading ?
                 <FakeLink>Não tem uma conta? Cadastre-se!</FakeLink>
