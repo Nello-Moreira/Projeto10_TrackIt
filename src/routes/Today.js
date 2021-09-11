@@ -1,3 +1,4 @@
+import routes from '../routes/routes';
 import Header from '../components/header/Header';
 import PageContainer from '../components/containers/PageContainer';
 import { PageHeadingContainer, PageHeading, PageSubHeading } from '../components/containers/PageHeadingContainer';
@@ -8,10 +9,12 @@ import Footer from '../components/footer/Footer';
 import UserContext from '../contexts/UserContext';
 import TodaysHabitsPercentage from '../contexts/TodaysHabitsPercentage';
 import { useState, useContext, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { getTodaysHabits } from '../API/requests';
 import { todaysFormattedString } from '../auxiliary/time';
 
 export default function Today() {
+    const history = useHistory();
     const { user } = useContext(UserContext);
     const { habitsPercentage, setHabitsPercentage } = useContext(TodaysHabitsPercentage);
     const [loading, setLoading] = useState(true);
@@ -19,6 +22,8 @@ export default function Today() {
     const { done, total, getPercentage } = habitsPercentage;
 
     useEffect(() => {
+        if (!user.token) return;
+
         getTodaysHabits(user.token)
             .then(response => {
                 updateHabitsPercentage(response.data);
@@ -26,6 +31,11 @@ export default function Today() {
                 setLoading(false);
             });
     }, [user.token]);
+
+    if (!user.token) {
+        history.push(routes.login);
+        return null;
+    };
 
     function updateHabits() {
         getTodaysHabits(user.token)

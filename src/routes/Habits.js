@@ -1,3 +1,4 @@
+import routes from '../routes/routes';
 import Header from '../components/header/Header';
 import PageContainer from '../components/containers/PageContainer';
 import { PageHeadingContainer, PageHeading } from '../components/containers/PageHeadingContainer';
@@ -10,9 +11,11 @@ import CircleLoader from '../components/loader/CircleLoader';
 import UserContext from '../contexts/UserContext';
 import TodaysHabitsPercentage from '../contexts/TodaysHabitsPercentage';
 import { useState, useContext, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { getAllHabits, getTodaysHabits } from '../API/requests';
 
 export default function Habits() {
+    const history = useHistory();
     const { user } = useContext(UserContext);
     const { habitsPercentage, setHabitsPercentage } = useContext(TodaysHabitsPercentage);
     const [adding, setAdding] = useState(false);
@@ -21,6 +24,8 @@ export default function Habits() {
     const [newHabitObject, setNewHabitObject] = useState({ name: '', days: [] });
 
     useEffect(() => {
+        if (!user.token) return;
+
         getAllHabits(user.token)
             .then(response => {
                 setHabits(response.data);
@@ -28,6 +33,10 @@ export default function Habits() {
             });
     }, [user.token]);
 
+    if (!user.token) {
+        history.push(routes.login);
+        return null;
+    };
 
     function updateHabitsPercentage() {
         getTodaysHabits(user.token)
