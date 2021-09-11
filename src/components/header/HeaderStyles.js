@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { keyframes } from 'styled-components';
 
 const HeaderContainer = styled.header`
     height: 70px;
