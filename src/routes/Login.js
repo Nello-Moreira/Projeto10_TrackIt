@@ -5,7 +5,7 @@ import TextInput from '../components/inputs/TextInput';
 import BlueButton from '../components/buttons/BlueButton';
 import CircleLoader from '../components/loader/CircleLoader';
 import routes from '../routes/routes';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { login } from '../API/requests';
 import statusCode from '../API/statusCode';
@@ -18,8 +18,23 @@ export default function Login({ setUser, pageFirstLoad, setPageFirstLoad }) {
     });
     const history = useHistory();
 
-    const requestLogin = useCallback(() => {
-        login(inputsValues)
+    useEffect(() => {
+        const user = JSON.parse(localStorage.getItem('trackItUser'));
+
+        if (user) return requestLogin({ email: user.email, password: user.password });
+
+        setPageFirstLoad(false);
+    }, [])
+
+    function formHandler(event) {
+        event.preventDefault();
+        setLoading(true);
+
+        requestLogin(inputsValues);
+    }
+
+    function requestLogin(user) {
+        login(user)
             .then(response => {
                 localStorage.setItem('trackItUser', JSON.stringify(response.data))
                 setUser({ ...response.data });
@@ -33,25 +48,6 @@ export default function Login({ setUser, pageFirstLoad, setPageFirstLoad }) {
                     alert('Houve uma falha no login. Por favor, verifique o e-mail e tente novamente.')
                 };
             });
-    }, [inputsValues, history, setUser]);
-
-    useEffect(() => {
-        const user = JSON.parse(localStorage.getItem('trackItUser'));
-
-        if (user) {
-            setInputsValues({ email: user.email, password: user.password });
-            requestLogin()
-            return;
-        };
-
-        setPageFirstLoad(false);
-    }, [requestLogin, setPageFirstLoad]);
-
-    function formHandler(event) {
-        event.preventDefault();
-        setLoading(true);
-
-        requestLogin(inputsValues);
     }
 
     return (
