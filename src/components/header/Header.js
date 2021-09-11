@@ -1,43 +1,33 @@
-import styled from "styled-components";
+import { HeaderContainer, LogoText, ProfileImage, Menu } from './HeaderStyles';
 import UserContext from '../../contexts/UserContext';
-import { useContext } from 'react';
+import { useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
+import routes from '../../routes/routes';
 
 export default function Header() {
     const { user } = useContext(UserContext);
+    const [menuOpened, setMenuOpened] = useState(false);
+    const history = useHistory();
+
+    function logout() {
+        setMenuOpened(false);
+        localStorage.removeItem('trackItUser');
+        history.push(routes.login);
+    }
+
 
     return (
-        <HeaderContainer>
-            <LogoText>TrackIt</LogoText>
-            <ProfileImage src={user.image} />
-        </HeaderContainer>
+        <>
+            <HeaderContainer>
+                <LogoText>TrackIt</LogoText>
+                <ProfileImage src={user.image} onClick={() => { setMenuOpened(!menuOpened) }} />
+
+            </HeaderContainer>
+
+            <Menu menuOpened={menuOpened}>
+                <span>{user.name}</span>
+                <button onClick={logout}>Teste</button>
+            </Menu>
+        </>
     );
 };
-
-const HeaderContainer = styled.header`
-    height: 70px;
-    width: 375px;
-    width: 100vw;
-    background-color: rgba(18, 107, 165, 1);
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-`;
-
-const LogoText = styled.span` 
-    font-family: 'Playball', cursive;
-    font-size: 39px;
-    color: rgba(255, 255, 255, 1);
-    margin-left: 20px;
-`;
-
-const ProfileImage = styled.img`
-    height: 51px;
-    width: 51px;
-    border-radius: 50%;
-    margin-right: 20px;
-    object-fit: cover;
-`;
