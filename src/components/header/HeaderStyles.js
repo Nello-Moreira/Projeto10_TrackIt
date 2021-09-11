@@ -7,7 +7,7 @@ const HeaderContainer = styled.header`
     background-color: rgba(18, 107, 165, 1);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
     position: fixed;
-    z-index: 1;
+    z-index: 2;
     top: 0px;
     left: 0px;
     display: flex;
@@ -39,6 +39,7 @@ const Menu = styled.div`
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     position: fixed;
+    z-index: 1;
     top: ${({ menuOpened }) => menuOpened ? '70px' : '-30vh'};
     right: 0;
     display: flex;
