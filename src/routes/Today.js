@@ -8,7 +8,7 @@ import WarningOfNoHabits from '../components/habit/WarningOfNoHabits';
 import Footer from '../components/footer/Footer';
 import UserContext from '../contexts/UserContext';
 import TodaysHabitsPercentage from '../contexts/TodaysHabitsPercentage';
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext, useEffect, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import { getTodaysHabits } from '../API/requests';
 import { todaysFormattedString } from '../auxiliary/time';
@@ -21,38 +21,32 @@ export default function Today() {
     const [todaysHabits, setTodaysHabits] = useState([]);
     const { done, total, getPercentage } = habitsPercentage;
 
-    useEffect(() => {
-        if (!user.token) return;
-
+    const updateHabits = useCallback(() => {
         getTodaysHabits(user.token)
             .then(response => {
-                updateHabitsPercentage(response.data);
+
+                setHabitsPercentage({
+                    done: response.data.filter((habit) => habit.done).length,
+                    total: response.data.length,
+                    getPercentage
+                })
+
                 setTodaysHabits(response.data);
                 setLoading(false);
             });
-    }, [user.token]);
+    }, [user.token, getPercentage, setHabitsPercentage]);
+
+    useEffect(() => {
+        if (!user.token) return;
+
+        updateHabits();
+
+    }, [user.token, updateHabits]);
 
     if (!user.token) {
         history.push(routes.login);
         return null;
     };
-
-    function updateHabits() {
-        getTodaysHabits(user.token)
-            .then(response => {
-                updateHabitsPercentage(response.data);
-                setTodaysHabits(response.data);
-                setLoading(false);
-            });
-    }
-
-    function updateHabitsPercentage(todaysHabits) {
-        setHabitsPercentage({
-            done: todaysHabits.filter((habit) => habit.done).length,
-            total: todaysHabits.length,
-            getPercentage
-        })
-    }
 
     return (
         <>
