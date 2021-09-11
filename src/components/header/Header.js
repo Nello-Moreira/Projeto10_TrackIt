@@ -25,7 +25,7 @@ export default function Header() {
 
             <Menu menuOpened={menuOpened}>
                 <span>{user.name}</span>
-                <button onClick={logout}>Teste</button>
+                <button onClick={logout}>Sair</button>
             </Menu>
         </>
     );
