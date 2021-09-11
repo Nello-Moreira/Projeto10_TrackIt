@@ -24,12 +24,7 @@ export default function Today() {
     useEffect(() => {
         if (!user.token) return;
 
-        getTodaysHabits(user.token)
-            .then(response => {
-                updateHabitsPercentage(response.data);
-                setTodaysHabits(response.data);
-                setLoading(false);
-            });
+        updateHabits();
     }, [user.token]);
 
     if (!user.token) {

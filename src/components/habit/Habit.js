@@ -15,7 +15,7 @@ export default function Habit({ habit, updateHabits }) {
         return (habit.done ?
             uncheckHabit(habit, user.token)
                 .then(response => {
-                    updateHabits(habit);
+                    updateHabits();
                     setLoading(false);
                 })
                 .catch(response => {
@@ -25,7 +25,7 @@ export default function Habit({ habit, updateHabits }) {
             :
             checkHabit(habit, user.token)
                 .then(response => {
-                    updateHabits(habit);
+                    updateHabits();
                     setLoading(false);
                 })
                 .catch(response => {
