@@ -11,6 +11,7 @@ import UserContext from './contexts/UserContext';
 import TodaysHabitsPercentage from './contexts/TodaysHabitsPercentage';
 
 export default function App() {
+  const [pageFirstLoad, setPageFirstLoad] = useState(true);
   const [user, setUser] = useState({});
   const [habitsPercentage, setHabitsPercentage] = useState({
     done: 0,
@@ -22,7 +23,7 @@ export default function App() {
     <Router>
       <Switch>
         <Route exact path={routes.login}>
-          <Login setUser={setUser} />
+          <Login setUser={setUser} pageFirstLoad={pageFirstLoad} setPageFirstLoad={setPageFirstLoad} />
         </Route>
 
         <Route exact path={routes.signUp}>
