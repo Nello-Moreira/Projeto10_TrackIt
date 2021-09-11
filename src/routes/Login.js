@@ -8,6 +8,7 @@ import routes from '../routes/routes';
 import { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { login } from '../API/requests';
+import statusCode from '../API/statusCode';
 
 export default function Login({ setUser, pageFirstLoad, setPageFirstLoad }) {
     const [loading, setLoading] = useState(false);
@@ -42,8 +43,8 @@ export default function Login({ setUser, pageFirstLoad, setPageFirstLoad }) {
             .catch(error => {
                 setLoading(false);
 
-                if (error.response.status === 401) return alert(error.response.data.message);
-                if (error.response.status === 422) {
+                if (error.response.status === statusCode.unauthorized) return alert(error.response.data.message);
+                if (error.response.status === statusCode.bodyError) {
                     alert('Houve uma falha no login. Por favor, verifique o e-mail e tente novamente.')
                 };
             });
@@ -51,7 +52,7 @@ export default function Login({ setUser, pageFirstLoad, setPageFirstLoad }) {
 
     return (
         pageFirstLoad ?
-            <CircleLoader customStyle={{ height: '100vw' }} />
+            <CircleLoader customStyle={{ height: '100vh' }} />
             :
             <LoginContainer loading={{ loading }}>
                 <Logo />
