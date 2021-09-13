@@ -13,4 +13,4 @@ This is the 10th project made by me to
 * JavaScript || ReactJS || Axios
 
 # See the result here
-[*Project url*](https://github.com/Nello-Moreira/Projeto10_TrackIt)
+[*Project url*](https://trackit-eta.vercel.app/)
