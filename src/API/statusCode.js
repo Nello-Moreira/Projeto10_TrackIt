@@ -1,6 +1,7 @@
-const statusCode = { 
+const statusCode = {
     unauthorized: 401,
-    bodyError: 422 
+    unavailableName: 409,
+    bodyError: 422
 };
 
 export default statusCode;

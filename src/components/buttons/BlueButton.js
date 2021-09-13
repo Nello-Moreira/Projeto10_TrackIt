@@ -22,6 +22,9 @@ const Button = styled.button`
     background-color: rgb(18, 107, 165);
     border: none;
     border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     :hover{
         background-color: ${({ customStyle }) => customStyle.loading ? 'rgb(18, 107, 165)' : 'rgb(82, 182, 255)'};;

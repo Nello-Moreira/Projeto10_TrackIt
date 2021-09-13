@@ -7,7 +7,7 @@ import routes from '../routes/routes';
 import { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { signUp } from '../API/requests';
-import { isFormEmpty } from '../auxiliary/formValidations';
+import statusCode from '../API/statusCode';
 
 export default function SignUp() {
     const [loading, setLoading] = useState(false);
@@ -22,20 +22,16 @@ export default function SignUp() {
     function requestSignUp(event) {
         event.preventDefault();
 
-        if (isFormEmpty(inputsValues)) {
-            alert('Preencha todos os campos');
-            return;
-        }
-
         setLoading(true);
 
         signUp(inputsValues)
             .then(response => {
                 history.push(routes.login);
             })
-            .catch(response => {
-                alert('Houve uma falha no cadastro. Por favor, tente novamente.');
+            .catch(error => {
                 setLoading(false);
+                if (error.response.status === statusCode.unavailableName) return alert(error.response.data.message);
+                alert('Houve uma falha no cadastro. Por favor, tente novamente.');
             });
     }
 
