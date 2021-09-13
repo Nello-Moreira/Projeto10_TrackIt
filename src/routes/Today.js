@@ -54,7 +54,7 @@ export default function Today() {
 
             <PageContainer>
                 <PageHeadingContainer>
-                    <PageHeading>{getDateFormattedString(new Date, 'pt-BR')}</PageHeading>
+                    <PageHeading>{getDateFormattedString(new Date(), 'pt-BR')}</PageHeading>
                     
                     {todaysHabits.length === 0 ?
                         null
