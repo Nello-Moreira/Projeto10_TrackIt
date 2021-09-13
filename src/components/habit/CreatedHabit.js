@@ -16,11 +16,10 @@ export default function CreatedHabit({ habit, habits, updateHabitsPercentage }) 
             setLoading(true);
 
             deleteHabit(habit.id, user.token)
-                .then((response) =>{
+                .then((response) => {
                     updateHabitsPercentage();
                     habits.setHabits(habits.data.filter((otherHabit) => otherHabit.id !== habit.id));
-                }
-                )
+                })
                 .catch((response) => alert('Algo deu errado. Por favor, tente de novo.'));
         }
     }

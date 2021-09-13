@@ -2,26 +2,16 @@ const daysFirstLetter = [
     'D', 'S', 'T', 'Q', 'Q', 'S', 'S'
 ];
 
-function todaysFormattedString() {
-    const today = new Date();
-    const options = { weekday: 'long', month: 'numeric', day: 'numeric' };
-    const todayString = today.toLocaleDateString('pt-BR', options);
+function getDateFormattedString(date, locale) {
+    const options = { weekday: 'long', day: 'numeric', month: 'numeric' };
+    const todayString = date.toLocaleDateString(locale, options);
 
     return todayString[0].toUpperCase() + todayString.slice(1);
 }
 
-function getDayPercentage() {
-    const now = new Date();
-    const midnightBefore = new Date();
-    const midnightAfter = new Date();
-
-    midnightBefore.setHours(0, 0, 0);
-    midnightAfter.setHours(0, 0, 0);
-    midnightAfter.setDate(now.getDate() + 1);
-
-    const dayPercentage = (now - midnightBefore) / (midnightAfter - midnightBefore) * 100;
-
-    return dayPercentage;
+function getDateInNumbers(date, locale) {
+    const options = { day: 'numeric', month: 'numeric', year: 'numeric' };
+    return date.toLocaleDateString(locale, options);
 }
 
-export { daysFirstLetter, todaysFormattedString, getDayPercentage };
+export { daysFirstLetter, getDateFormattedString, getDateInNumbers };

@@ -11,7 +11,7 @@ import TodaysHabitsPercentage from '../contexts/TodaysHabitsPercentage';
 import { useState, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { getTodaysHabits } from '../API/requests';
-import { todaysFormattedString } from '../auxiliary/time';
+import { getDateFormattedString } from '../auxiliary/time';
 
 export default function Today() {
     const history = useHistory();
@@ -23,7 +23,6 @@ export default function Today() {
 
     useEffect(() => {
         if (!user.token) return;
-
         updateHabits();
     }, [user.token]);
 
@@ -43,9 +42,9 @@ export default function Today() {
 
     function updateHabitsPercentage(todaysHabits) {
         setHabitsPercentage({
+            ...habitsPercentage,
             done: todaysHabits.filter((habit) => habit.done).length,
-            total: todaysHabits.length,
-            getPercentage
+            total: todaysHabits.length
         })
     }
 
@@ -55,7 +54,8 @@ export default function Today() {
 
             <PageContainer>
                 <PageHeadingContainer>
-                    <PageHeading>{todaysFormattedString()}</PageHeading>
+                    <PageHeading>{getDateFormattedString(new Date, 'pt-BR')}</PageHeading>
+                    
                     {todaysHabits.length === 0 ?
                         null
                         :

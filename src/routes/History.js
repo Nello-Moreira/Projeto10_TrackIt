@@ -11,6 +11,7 @@ import styled from 'styled-components';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { getHabitsHistory } from '../API/requests';
+import { getDateInNumbers } from '../auxiliary/time';
 
 export default function History(params) {
     const history = useHistory();
@@ -35,10 +36,8 @@ export default function History(params) {
         return null;
     };
 
-    function dayStyle(locale, date) {
-        const options = { day: 'numeric', month: 'numeric', year: 'numeric' };
-        const formattedDate = date.toLocaleDateString(locale, options);
-        const habitsDay = habitsHistory.find((element) => element.day === formattedDate);
+    function setDayStyle(date, locale) {
+        const habitsDay = habitsHistory.find((element) => element.day === getDateInNumbers(date, locale));
 
         if (!habitsDay) return { noHabits: true };
 
@@ -65,7 +64,7 @@ export default function History(params) {
                             onChange={onChange}
                             value={value}
                             formatDay={(locale, date) => (
-                                <StyledDay customStyle={dayStyle(locale, date)}>
+                                <StyledDay customStyle={setDayStyle(date, locale)}>
                                     {date.getDate()}
                                 </StyledDay>
                             )}
